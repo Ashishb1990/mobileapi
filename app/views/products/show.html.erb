@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong>Discount:</strong>
+  <%= @product.discount %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @product.user_id %>
+</p>
+<%
+ hash = Digest::SHA2.new(512).hexdigest("qIvK2TsU|ab23|100|apple|ashish|ashish@gmail.com||||||AqaToUJKXW")
+%>
+<form action="https://test.payu.in/_payment" method="POST">
+<input type="hidden" name="key" value="qIvK2TsU">
+<input type="hidden" name="txnid" value="ab23">
+<input type="hidden" name="amount" value="100">
+<input type="hidden" name="productinfo" value="apple">
+<input type="hidden" name="firstname" value="Ashish">
+<input type="hidden" name="email" value="ashishbittern107@gmail.com">
+<input type="hidden" name="phone" value="9015356775">
+<input type="hidden" name="surl" value="http://localhost:3000/success">
+<input type="hidden" name="furl" value="http://localhost:3000/faild">
+
+<input type="hidden" name="hash" value="<%= hash %>">
+<input type="hidden" name="service_provider" value="payu_paisa">
+<button>Payment</button>
+</form>
+
+<!-- <input type="hidden" name="hash" value="Checksum=sha512sha512(qIvK2TsU|ab23|100|apple|ashish|ashish@gmail.com|9015356775||||||AqaToUJKXW) "> -->
+
+
+
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
